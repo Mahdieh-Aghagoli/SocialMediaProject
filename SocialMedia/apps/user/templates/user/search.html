@@ -1,0 +1,26 @@
+{% load static %}
+<head>
+    <link rel="stylesheet" href="{% static 'jquery-ui-1.12.1.custom/jquery-ui.min.css' %}">
+</head>
+<form action="">
+    <input type="text" name="autocomplete_user" id="autocomplete_user" class="search-container"
+           placeholder="     Search...">
+</form>
+<script src="{% static 'jquery-ui-1.12.1.custom/jquery-1.12.4.min.js' %}"></script>
+<script src="{% static 'jquery-ui-1.12.1.custom/jquery-ui.min.js' %}"></script>
+<script>
+    $(function () {
+
+        $("#autocomplete_user").autocomplete({
+            source: '{% url 'autocomplete' user.slug %}',
+            minLength: 3,
+
+        });
+
+    });
+    $(document).on('click', '#ui-id-1 li', function () {
+        var div = $(this).find('div').text();
+        window.location.href = "{% url 'user-posts'  0 %}".replace(0, div);
+    });
+
+</script>
